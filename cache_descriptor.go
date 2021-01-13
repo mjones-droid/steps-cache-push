@@ -77,10 +77,34 @@ func compare(old map[string]string, new map[string]string) result {
 func cacheDescriptor(pathToIndicatorFile map[string]string, method ChangeIndicator) (map[string]string, error) {
 	pathToIndicator := map[string]string{}
 
+	log.Donef("Getting indicator to paths")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+
 	indicatorToPaths := map[string][]string{}
 	for path, indicatorPath := range pathToIndicatorFile {
 		indicatorToPaths[indicatorPath] = append(indicatorToPaths[indicatorPath], path)
 	}
+
+	log.Donef("Getting path to indicator")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 
 	for indicatorPath, paths := range indicatorToPaths {
 		var indicator string
@@ -137,16 +161,52 @@ func fileModtime(pth string) (string, error) {
 
 // readCacheDescriptor reads cache descriptor from pth is exists.
 func readCacheDescriptor(pth string) (map[string]string, error) {
+
+	log.Donef("Checking if path exists")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 	if exists, err := pathutil.IsPathExists(pth); err != nil {
 		return nil, err
 	} else if !exists {
 		return nil, nil
 	}
 
+	log.Donef("Reading bytes from file")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+
 	fileBytes, err := fileutil.ReadBytesFromFile(pth)
 	if err != nil {
 		return nil, err
 	}
+
+	log.Donef("Unmarshaling JSON")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 
 	var previousFilePathMap map[string]string
 	err = json.Unmarshal(fileBytes, &previousFilePathMap)

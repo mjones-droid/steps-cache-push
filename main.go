@@ -79,6 +79,18 @@ func main() {
 
 	log.Infof("Checking previous cache status")
 
+	log.Infof("Reading Cache Descriptor")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+
 	prevDescriptor, err := readCacheDescriptor(cacheInfoFilePath)
 	if err != nil {
 		logErrorfAndExit("Failed to read previous cache descriptor: %s", err)
@@ -89,6 +101,18 @@ func main() {
 	} else {
 		log.Printf("No previous cache info found")
 	}
+
+	log.Donef("Creating Cache Descriptor")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 
 	curDescriptor, err := cacheDescriptor(pathToIndicatorPath, ChangeIndicator(configs.FingerprintMethodID))
 	if err != nil {
@@ -108,6 +132,18 @@ func main() {
 				log.Debugf("- %s", pth)
 			}
 		}
+
+		log.Donef("Comparing previous descriptor with current descriptor")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
 
 		result := compare(prevDescriptor, curDescriptor)
 
@@ -137,28 +173,99 @@ func main() {
 	startTime = time.Now()
 
 	log.Infof("Generating cache archive")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 
 	archive, err := NewArchive(cacheArchivePath, configs.CompressArchive == "true")
 	if err != nil {
 		logErrorfAndExit("Failed to create archive: %s", err)
 	}
 
+	log.Donef("Getting Stack Version Data")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+
 	stackData, err := stackVersionData(configs.StackID)
 	if err != nil {
 		logErrorfAndExit("Failed to get stack version info: %s", err)
 	}
+
+	log.Donef("Writing archive data to disk")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+
 	// This is the first file written, to speed up reading it in subsequent builds
 	if err = archive.writeData(stackData, stackVersionsPath); err != nil {
 		logErrorfAndExit("Failed to write cache info to archive, error: %s", err)
 	}
 
+	log.Donef("Pouplating Archive")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+
 	if err := archive.Write(pathToIndicatorPath); err != nil {
 		logErrorfAndExit("Failed to populate archive: %s", err)
 	}
 
+	log.Donef("Writing header to archive")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+
 	if err := archive.WriteHeader(curDescriptor, cacheInfoFilePath); err != nil {
 		logErrorfAndExit("Failed to write archive header: %s", err)
 	}
+
+	log.Donef("Closing Archive")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 
 	if err := archive.Close(); err != nil {
 		logErrorfAndExit("Failed to close archive: %s", err)
@@ -170,6 +277,16 @@ func main() {
 	startTime = time.Now()
 
 	log.Infof("Uploading cache archive")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 
 	if err := uploadArchive(cacheArchivePath, configs.CacheAPIURL, configs.BuildSlug); err != nil {
 		logErrorfAndExit("Failed to upload archive: %s", err)

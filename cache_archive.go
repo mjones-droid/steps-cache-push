@@ -28,6 +28,17 @@ type Archive struct {
 
 // NewArchive creates a instance of Archive.
 func NewArchive(pth string, compress bool) (*Archive, error) {
+	log.Donef("Creating File")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 	file, err := os.Create(pth)
 	if err != nil {
 		return nil, err
@@ -36,6 +47,17 @@ func NewArchive(pth string, compress bool) (*Archive, error) {
 	var tarWriter *tar.Writer
 	var gzipWriter *gzip.Writer
 	if compress {
+		log.Donef("Compressing File")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
 		gzipWriter, err = gzip.NewWriterLevel(file, gzip.BestCompression)
 		if err != nil {
 			return nil, err
@@ -43,6 +65,17 @@ func NewArchive(pth string, compress bool) (*Archive, error) {
 
 		tarWriter = tar.NewWriter(gzipWriter)
 	} else {
+		log.Donef("Creating uncompressed TAR")
+	log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
 		tarWriter = tar.NewWriter(file)
 	}
 	return &Archive{
@@ -115,16 +148,49 @@ func (a *Archive) writeOne(pth string) error {
 
 // WriteHeader writes the cache descriptor file into the archive as a tar header.
 func (a *Archive) WriteHeader(descriptor map[string]string, descriptorPth string) error {
+	log.Donef("Marshalling Header JSON")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 	b, err := json.MarshalIndent(descriptor, "", " ")
 	if err != nil {
 		return err
 	}
 
+	log.Donef("Actually writing data to the header")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 	return a.writeData(b, descriptorPth)
 }
 
 // writeData writes the byte array into the archive.
 func (a *Archive) writeData(data []byte, descriptorPth string) error {
+	log.Donef("Creating Header")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 	header := &tar.Header{
 		Name:     descriptorPth,
 		Size:     int64(len(data)),
@@ -133,9 +199,33 @@ func (a *Archive) writeData(data []byte, descriptorPth string) error {
 		ModTime:  time.Now(),
 	}
 
+	log.Donef("Writing Header")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+
 	if err := a.tar.WriteHeader(header); err != nil {
 		return err
 	}
+
+	log.Donef("Copying Data io.copy")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 
 	if _, err := io.Copy(a.tar, bytes.NewReader(data)); err != nil && err != io.EOF {
 		return err
@@ -145,9 +235,32 @@ func (a *Archive) writeData(data []byte, descriptorPth string) error {
 
 // Close closes the archive.
 func (a *Archive) Close() error {
+	log.Donef("Tar Close")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 	if err := a.tar.Close(); err != nil {
 		return err
 	}
+
+	log.Donef("Gzip Close")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 
 	if a.gzip != nil {
 		if err := a.gzip.Close(); err != nil {
@@ -155,6 +268,17 @@ func (a *Archive) Close() error {
 		}
 	}
 
+	log.Donef("File Close Return")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 	return a.file.Close()
 }
 
@@ -162,19 +286,66 @@ func (a *Archive) Close() error {
 // If the destination is a local file path (url has a file:// scheme) this function copies the cache archive file to the destination.
 // Otherwise destination should point to the Bitrise cache API server, in this case the function has builtin retry logic with 3s sleep.
 func uploadArchive(pth, url string, buildSlug string) error {
+	log.Donef("Trim String Prefix")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 	if strings.HasPrefix(url, "file://") {
 		dst := strings.TrimPrefix(url, "file://")
 		dir := filepath.Dir(dst)
 		if err := os.MkdirAll(dir, 0755); err != nil {
 			return err
 		}
+		log.Donef("Return command.CopyFile")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+		log.Infof("..")
+
 		return command.CopyFile(pth, dst)
 	}
+
+	log.Donef("Checking if path exists for upload")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 
 	fi, err := os.Stat(pth)
 	if err != nil {
 		return fmt.Errorf("failed to get file info (%s): %s", pth, err)
 	}
+	log.Donef("Getting File Size")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+
 	sizeInBytes := fi.Size()
 	log.Printf("Archive file size: %d bytes / %f MB", sizeInBytes, (float64(sizeInBytes) / 1024.0 / 1024.0))
 	data := map[string]interface{}{
@@ -183,10 +354,33 @@ func uploadArchive(pth, url string, buildSlug string) error {
 	}
 	log.RInfof(stepID, "cache_archive_size", data, "Size of cache archive: %d Bytes", sizeInBytes)
 
+	log.Donef("Getting Cache Upload URL")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 	uploadURL, err := getCacheUploadURL(url, sizeInBytes)
 	if err != nil {
 		return fmt.Errorf("failed to generate upload url: %s", err)
 	}
+
+	log.Donef("Attempting Archive Upload")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 
 	if err := tryToUploadArchive(uploadURL, pth); err != nil {
 		fmt.Println()
@@ -236,6 +430,17 @@ func getCacheUploadURL(cacheAPIURL string, fileSizeInBytes int64) (string, error
 // If the destination is a local file path (url has a file:// scheme) this function copies the cache archive file to the destination.
 // Otherwise destination should be a remote url.
 func tryToUploadArchive(uploadURL string, archiveFilePath string) error {
+	log.Donef("Opening Archive File")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 	archFile, err := os.Open(archiveFilePath)
 	if err != nil {
 		return fmt.Errorf("failed to open archive file for upload (%s): %s", archiveFilePath, err)
@@ -251,19 +456,67 @@ func tryToUploadArchive(uploadURL string, archiveFilePath string) error {
 		}
 	}()
 
+	log.Donef("Getting start of archive file")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+
 	fileInfo, err := archFile.Stat()
 	if err != nil {
 		return fmt.Errorf("failed to get file stats of the archive file (%s): %s", archiveFilePath, err)
 	}
 	fileSize := fileInfo.Size()
 
+	log.Donef("Creating new http request")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+
 	req, err := http.NewRequest(http.MethodPut, uploadURL, archFile)
 	if err != nil {
 		return fmt.Errorf("failed to create upload request: %s", err)
 	}
 
+	log.Donef("Adding HTTP Headers")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+
 	req.Header.Add("Content-Length", strconv.FormatInt(fileSize, 10))
 	req.ContentLength = fileSize
+
+	log.Donef("Perform actual upload")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
+	log.Infof("..")
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
