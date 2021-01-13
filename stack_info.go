@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/bitrise-io/go-utils/log"
 )
 
 func stackVersionData(stackID string) ([]byte, error) {

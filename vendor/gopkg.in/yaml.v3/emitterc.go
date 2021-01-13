@@ -77,18 +77,6 @@ func put_break(emitter *yaml_emitter_t) bool {
 
 // Copy a character from a string into buffer.
 func write(emitter *yaml_emitter_t, s []byte, i *int) bool {
-	log.Donef("Checking buffers")
-	log.Infof("..")
-	log.Infof("..")
-	log.Infof("..")
-	log.Infof("..")
-	log.Infof("..")
-	log.Infof("..")
-	log.Infof("..")
-	log.Infof("..")
-	log.Infof("..")
-	log.Infof("..")
-
 	if emitter.buffer_pos+5 >= len(emitter.buffer) && !yaml_emitter_flush(emitter) {
 		return false
 	}
