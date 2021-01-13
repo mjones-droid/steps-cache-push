@@ -102,7 +102,7 @@ func main() {
 		log.Printf("No previous cache info found")
 	}
 
-	log.Donef("Creating Cache Descriptor")
+	log.Infof("Creating Cache Descriptor")
 	log.Infof("..")
 	log.Infof("..")
 	log.Infof("..")
@@ -133,7 +133,7 @@ func main() {
 			}
 		}
 
-		log.Donef("Comparing previous descriptor with current descriptor")
+		log.Infof("Comparing previous descriptor with current descriptor")
 		log.Infof("..")
 		log.Infof("..")
 		log.Infof("..")
@@ -189,7 +189,7 @@ func main() {
 		logErrorfAndExit("Failed to create archive: %s", err)
 	}
 
-	log.Donef("Getting Stack Version Data")
+	log.Infof("Getting Stack Version Data")
 	log.Infof("..")
 	log.Infof("..")
 	log.Infof("..")
@@ -206,7 +206,7 @@ func main() {
 		logErrorfAndExit("Failed to get stack version info: %s", err)
 	}
 
-	log.Donef("Writing archive data to disk")
+	log.Infof("Writing archive data to disk")
 	log.Infof("..")
 	log.Infof("..")
 	log.Infof("..")
@@ -223,7 +223,7 @@ func main() {
 		logErrorfAndExit("Failed to write cache info to archive, error: %s", err)
 	}
 
-	log.Donef("Pouplating Archive")
+	log.Infof("Pouplating Archive")
 	log.Infof("..")
 	log.Infof("..")
 	log.Infof("..")
@@ -239,7 +239,7 @@ func main() {
 		logErrorfAndExit("Failed to populate archive: %s", err)
 	}
 
-	log.Donef("Writing header to archive")
+	log.Infof("Writing header to archive")
 	log.Infof("..")
 	log.Infof("..")
 	log.Infof("..")
@@ -255,7 +255,7 @@ func main() {
 		logErrorfAndExit("Failed to write archive header: %s", err)
 	}
 
-	log.Donef("Closing Archive")
+	log.Infof("Closing Archive")
 	log.Infof("..")
 	log.Infof("..")
 	log.Infof("..")

@@ -10,7 +10,7 @@ func stackVersionData(stackID string) ([]byte, error) {
 	type archiveInfo struct {
 		StackID string `json:"stack_id,omitempty"`
 	}
-	log.Donef("Marshaling Stack Version Data JSON")
+	log.Infof("Marshaling Stack Version Data JSON")
 	log.Infof("..")
 	log.Infof("..")
 	log.Infof("..")

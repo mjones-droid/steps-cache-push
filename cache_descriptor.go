@@ -77,7 +77,7 @@ func compare(old map[string]string, new map[string]string) result {
 func cacheDescriptor(pathToIndicatorFile map[string]string, method ChangeIndicator) (map[string]string, error) {
 	pathToIndicator := map[string]string{}
 
-	log.Donef("Getting indicator to paths")
+	log.Infof("Getting indicator to paths")
 	log.Infof("..")
 	log.Infof("..")
 	log.Infof("..")
@@ -94,7 +94,7 @@ func cacheDescriptor(pathToIndicatorFile map[string]string, method ChangeIndicat
 		indicatorToPaths[indicatorPath] = append(indicatorToPaths[indicatorPath], path)
 	}
 
-	log.Donef("Getting path to indicator")
+	log.Infof("Getting path to indicator")
 	log.Infof("..")
 	log.Infof("..")
 	log.Infof("..")
@@ -162,7 +162,7 @@ func fileModtime(pth string) (string, error) {
 // readCacheDescriptor reads cache descriptor from pth is exists.
 func readCacheDescriptor(pth string) (map[string]string, error) {
 
-	log.Donef("Checking if path exists")
+	log.Infof("Checking if path exists")
 	log.Infof("..")
 	log.Infof("..")
 	log.Infof("..")
@@ -179,7 +179,7 @@ func readCacheDescriptor(pth string) (map[string]string, error) {
 		return nil, nil
 	}
 
-	log.Donef("Reading bytes from file")
+	log.Infof("Reading bytes from file")
 	log.Infof("..")
 	log.Infof("..")
 	log.Infof("..")
@@ -196,7 +196,7 @@ func readCacheDescriptor(pth string) (map[string]string, error) {
 		return nil, err
 	}
 
-	log.Donef("Unmarshaling JSON")
+	log.Infof("Unmarshaling JSON")
 	log.Infof("..")
 	log.Infof("..")
 	log.Infof("..")
